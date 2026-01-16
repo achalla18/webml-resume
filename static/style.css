@@ -1,0 +1,519 @@
+/* Resume Fit Scorer - Styles */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --success: #16a34a;
+    --success-light: #dcfce7;
+    --warning: #d97706;
+    --warning-light: #fef3c7;
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-900);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+header .subtitle {
+    color: var(--gray-500);
+    font-size: 1.1rem;
+}
+
+header nav {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+header nav a {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    transition: background 0.2s;
+}
+
+header nav a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.card h2 {
+    color: var(--gray-900);
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+}
+
+.card h3 {
+    color: var(--gray-700);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.card p {
+    color: var(--gray-500);
+}
+
+.card-description {
+    margin-bottom: 16px;
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+
+.alert-success {
+    background: var(--success-light);
+    color: var(--success);
+    border: 1px solid #bbf7d0;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--gray-700);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 6px;
+    color: var(--gray-500);
+    font-size: 0.85rem;
+}
+
+.file-input-wrapper {
+    position: relative;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-label {
+    display: block;
+    padding: 40px 20px;
+    border: 2px dashed var(--gray-300);
+    border-radius: var(--radius);
+    text-align: center;
+    color: var(--gray-500);
+    transition: all 0.2s;
+}
+
+.file-input-wrapper:hover .file-label {
+    border-color: var(--primary);
+    background: var(--gray-50);
+}
+
+.file-label.has-file {
+    border-color: var(--success);
+    color: var(--success);
+    background: var(--success-light);
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Threshold Slider */
+.threshold-slider {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    background: var(--gray-200);
+    border-radius: 4px;
+    outline: none;
+}
+
+.threshold-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.threshold-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-top: 4px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: var(--gray-200);
+    color: var(--gray-700);
+}
+
+.btn-secondary:hover {
+    background: var(--gray-300);
+}
+
+.btn-sample {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    padding: 8px 16px;
+}
+
+.btn-sample:hover {
+    background: var(--gray-200);
+}
+
+.sample-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.samples-hidden {
+    display: none;
+}
+
+/* Results Section */
+.score-card {
+    text-align: center;
+}
+
+.filename {
+    color: var(--gray-500);
+    margin-bottom: 24px;
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.probability-circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid;
+}
+
+.probability-circle.strong {
+    border-color: var(--success);
+    background: var(--success-light);
+}
+
+.probability-circle.weak {
+    border-color: var(--warning);
+    background: var(--warning-light);
+}
+
+.probability-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.probability-circle.strong .probability-value {
+    color: var(--success);
+}
+
+.probability-circle.weak .probability-value {
+    color: var(--warning);
+}
+
+.probability-label {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+}
+
+.decision-badge {
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.decision-badge.strong {
+    background: var(--success);
+    color: white;
+}
+
+.decision-badge.weak {
+    background: var(--warning);
+    color: white;
+}
+
+.threshold-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+}
+
+.threshold-explanation {
+    margin-top: 8px;
+}
+
+/* Contributions */
+.contributions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contribution-item {
+    display: grid;
+    grid-template-columns: 150px 1fr 80px;
+    align-items: center;
+    gap: 12px;
+}
+
+.term {
+    font-family: ui-monospace, monospace;
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contribution-bar-wrapper {
+    height: 24px;
+    background: var(--gray-100);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.contribution-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success), #22c55e);
+    border-radius: 4px;
+    min-width: 4px;
+}
+
+.contribution-value {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
+    color: var(--success);
+    text-align: right;
+}
+
+/* Technical Details */
+.technical-details {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+}
+
+.technical-details summary {
+    cursor: pointer;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.details-table {
+    width: 100%;
+    margin-top: 12px;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.details-table th,
+.details-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.details-table th {
+    background: var(--gray-50);
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.details-table td {
+    font-family: ui-monospace, monospace;
+}
+
+/* Text Preview */
+.text-preview {
+    background: var(--gray-50);
+    padding: 16px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.text-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Info Card */
+.info-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+}
+
+.info-card ol,
+.info-card ul {
+    margin: 12px 0;
+    padding-left: 24px;
+}
+
+.info-card li {
+    margin-bottom: 8px;
+    color: var(--gray-700);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .contribution-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    
+    .contribution-value {
+        text-align: left;
+    }
+    
+    .probability-circle {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .probability-value {
+        font-size: 2rem;
+    }
+}

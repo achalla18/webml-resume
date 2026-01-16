@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Resume | Resume Fit Scorer{% endblock %}
+
+{% block content %}
+<section class="upload-section">
+    <div class="card">
+        <h2>Upload Your Resume</h2>
+        <p>Upload a PDF resume to get an AI-powered fit score with detailed keyword analysis.</p>
+        
+        <form action="{{ url_for('score') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="form-group">
+                <label for="resume">Resume PDF</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="resume" name="resume" accept=".pdf" required>
+                    <span class="file-label">Choose a PDF file...</span>
+                </div>
+                <small>Max file size: 16MB. Text-based PDFs only (scanned documents may not work).</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="threshold">Decision Threshold: <span id="threshold-display">{{ default_threshold }}%</span></label>
+                <input type="range" id="threshold" name="threshold" min="10" max="99" value="{{ default_threshold }}" class="threshold-slider">
+                <div class="threshold-labels">
+                    <span>Lenient (10%)</span>
+                    <span>Strict (99%)</span>
+                </div>
+                <small>Resumes scoring above this threshold are marked as "Strong Fit".</small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                🔍 Analyze Resume
+            </button>
+        </form>
+    </div>
+    
+    <div class="card info-card">
+        <h3>How It Works</h3>
+        <ol>
+            <li><strong>Upload:</strong> Submit a PDF resume</li>
+            <li><strong>Extract:</strong> AI extracts and processes the text</li>
+            <li><strong>Score:</strong> ML model calculates fit probability</li>
+            <li><strong>Explain:</strong> See which keywords influenced the score</li>
+        </ol>
+        
+        <h3>About the Model</h3>
+        <p>This system uses a TF-IDF + Logistic Regression pipeline trained on resume data. 
+           Key features include:</p>
+        <ul>
+            <li>Unigrams + Bigrams (captures phrases like "machine learning")</li>
+            <li>Class-balanced training</li>
+            <li>Probabilistic output with adjustable threshold</li>
+            <li>Per-term explainability</li>
+        </ul>
+    </div>
+</section>
+
+<script>
+    // Update threshold display
+    const slider = document.getElementById('threshold');
+    const display = document.getElementById('threshold-display');
+    slider.addEventListener('input', function() {
+        display.textContent = this.value + '%';
+    });
+    
+    // Update file input label
+    const fileInput = document.getElementById('resume');
+    const fileLabel = document.querySelector('.file-label');
+    fileInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+            fileLabel.textContent = this.files[0].name;
+            fileLabel.classList.add('has-file');
+        } else {
+            fileLabel.textContent = 'Choose a PDF file...';
+            fileLabel.classList.remove('has-file');
+        }
+    });
+</script>
+{% endblock %}

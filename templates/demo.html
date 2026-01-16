@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Text Demo | Resume Fit Scorer{% endblock %}
+
+{% block content %}
+<section class="demo-section">
+    <div class="card">
+        <h2>Text Demo Mode</h2>
+        <p>Paste or type resume text directly to test the model without uploading a PDF.</p>
+        
+        <form action="{{ url_for('demo') }}" method="POST" class="demo-form">
+            <div class="form-group">
+                <label for="resume_text">Resume Text</label>
+                <textarea id="resume_text" name="resume_text" rows="10" 
+                          placeholder="Paste resume text here...
+
+Example:
+Senior Data Scientist with 5 years experience in machine learning, Python, and deep learning. Expert in TensorFlow, PyTorch, and scikit-learn. Built recommendation systems serving millions of users. PhD in Computer Science from Stanford." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="threshold">Decision Threshold: <span id="threshold-display">{{ default_threshold }}%</span></label>
+                <input type="range" id="threshold" name="threshold" min="10" max="99" value="{{ default_threshold }}" class="threshold-slider">
+                <div class="threshold-labels">
+                    <span>Lenient (10%)</span>
+                    <span>Strict (99%)</span>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                 Analyze Text
+            </button>
+        </form>
+    </div>
+    
+    <div class="card info-card">
+        <h3>Sample Resumes to Try</h3>
+        
+        <div class="sample-buttons">
+            <button class="btn btn-sample" data-sample="strong">
+                👍 Strong Fit Example
+            </button>
+            <button class="btn btn-sample" data-sample="weak">
+                👎 Weak Fit Example
+            </button>
+        </div>
+        
+        <div class="samples-hidden">
+            <div id="sample-strong">Senior Machine Learning Engineer with 8 years experience in deep learning, NLP, and computer vision. Expert in Python, TensorFlow, PyTorch, and scikit-learn. Built production ML systems at Google serving billions of predictions daily. Published research at NeurIPS and ICML. PhD in Computer Science. Strong experience with distributed computing, Kubernetes, and MLOps. Led team of 5 engineers on recommendation system project.</div>
+            <div id="sample-weak">Customer service representative with 3 years experience in retail. Strong communication skills and team player. Proficient in Microsoft Word and Excel. Bachelor's degree in Communications. Looking for new opportunities in the technology field. Completed online Python course.</div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Update threshold display
+    const slider = document.getElementById('threshold');
+    const display = document.getElementById('threshold-display');
+    slider.addEventListener('input', function() {
+        display.textContent = this.value + '%';
+    });
+    
+    // Sample text buttons
+    const sampleButtons = document.querySelectorAll('.btn-sample');
+    const textarea = document.getElementById('resume_text');
+    
+    sampleButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const sampleType = this.dataset.sample;
+            const sampleText = document.getElementById('sample-' + sampleType).textContent;
+            textarea.value = sampleText;
+            textarea.focus();
+        });
+    });
+</script>
+{% endblock %}

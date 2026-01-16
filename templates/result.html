@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Results | Resume Fit Scorer{% endblock %}
+
+{% block content %}
+<section class="results-section">
+    <!-- Score Card -->
+    <div class="card score-card">
+        <h2>Analysis Results</h2>
+        <p class="filename">?? {{ original_filename }}</p>
+        
+        <div class="score-display">
+            <div class="probability-circle {{ result.decision_class }}">
+                <span class="probability-value">{{ result.probability_percent }}</span>
+                <span class="probability-label">Fit Score</span>
+            </div>
+            
+            <div class="decision-badge {{ result.decision_class }}">
+                {{ result.decision }}
+            </div>
+        </div>
+        
+        <div class="threshold-info">
+            <p>Decision threshold: <strong>{{ result.threshold_percent }}</strong></p>
+            <p class="threshold-explanation">
+                {% if result.decision_class == 'strong' %}
+                    ? Score ({{ result.probability_percent }}) is above threshold ({{ result.threshold_percent }})
+                {% else %}
+                    ?? Score ({{ result.probability_percent }}) is below threshold ({{ result.threshold_percent }})
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    
+    <!-- Keyword Contributions -->
+    <div class="card contributions-card">
+        <h3>?? Top Contributing Keywords</h3>
+        <p class="card-description">These terms had the strongest positive influence on the fit score:</p>
+        
+        {% if result.contributions %}
+            <div class="contributions-list">
+                {% for item in result.contributions %}
+                    <div class="contribution-item">
+                        <span class="term">{{ item.term }}</span>
+                        <div class="contribution-bar-wrapper">
+<div class="contribution-bar"
+     style="width: {{ ((item.contribution / result.contributions[0].contribution) * 100)|round ~ '%' }}">
+</div>
+                        </div>
+                        <span class="contribution-value">+{{ "%.3f"|format(item.contribution) }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <details class="technical-details">
+                <summary>Technical Details</summary>
+                <p>Contribution = TF-IDF value � model coefficient</p>
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>TF-IDF</th>
+                            <th>Coefficient</th>
+                            <th>Contribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in result.contributions %}
+                            <tr>
+                                <td>{{ item.term }}</td>
+                                <td>{{ "%.4f"|format(item.tfidf) }}</td>
+                                <td>{{ "%.4f"|format(item.coefficient) }}</td>
+                                <td>{{ "%.4f"|format(item.contribution) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </details>
+        {% else %}
+            <p class="no-contributions">No significant positive contributors found.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Extracted Text Preview -->
+    <div class="card text-card">
+        <h3>?? Extracted Text Preview</h3>
+        <p class="card-description">This is how the system "sees" your resume:</p>
+        
+        <div class="text-preview">
+            {{ resume_text[:2000] }}{% if resume_text|length > 2000 %}...{% endif %}
+        </div>
+        
+        <p class="text-stats">
+            <span>Characters: {{ resume_text|length }}</span>
+            <span>Words: ~{{ resume_text.split()|length }}</span>
+        </p>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="actions">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">
+            ?? Analyze Another Resume
+        </a>
+        <a href="{{ url_for('demo') }}" class="btn btn-secondary">
+            ?? Try Text Demo
+        </a>
+    </div>
+</section>
+{% endblock %}
